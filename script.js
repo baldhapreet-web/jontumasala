@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. LOADER ---
     const loader = document.getElementById('loader');
     window.addEventListener('load', () => {
-        loader.classList.add('hidden');
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 3000); // 3 seconds
     });
 
     // --- 2 & 4 & 5 & 12: STICKY NAV, PROGRESS BAR, ACTIVE LINK, BACK-TO-TOP ---
@@ -72,15 +74,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+            const href = this.getAttribute('href');
+            if (href === '#') {
+                // Back-to-top / brand links -> scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            try {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (err) {
+                // Invalid selector (e.g. unusual href) - ignore
             }
         });
     });
 
     // --- 7. SCROLL REVEAL ANIMATIONS (IntersectionObserver) ---
-    const revealElements = document.querySelectorAll('.about-content, .feature-card, .ingredient-card, .timeline-item, .product-card, .gallery-item, .testimonial-card, .faq-item, .contact-wrapper');
+const revealElements = document.querySelectorAll('.about-content, .feature-card, .ingredient-card, .timeline-item, .product-card, .gallery-item, .testimonial-card, .faq-item, .contact-grid');
     if ('IntersectionObserver' in window) {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -140,43 +152,83 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 10. DARK MODE ---
-    const darkModeSwitch = document.getElementById('dark-mode-switch');
-    // Apply saved preference before first paint to avoid flash
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-        darkModeSwitch.checked = true;
-    }
-    darkModeSwitch.addEventListener('change', () => {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    });
-
-    // --- 11. CUSTOM CURSOR ---
-const cursor = document.querySelector('.custom-cursor');
+    // --- 11. CUSTOM CURSOR WITH MASALA SPRINKLE EFFECT ---
+    const cursor = document.querySelector('.custom-cursor');
     if (window.innerWidth > 768) { // Only show custom cursor on desktop
-        let lastMove = 0;
+        // Masala particle palette (spice colors: orange, red, brown, green, yellow)
+        const masalaColors = ['#F57C00', '#D84315', '#6D4C41', '#43A047', '#FDD835', '#E65100'];
+
+        const spawnParticles = (x, y, count) => {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'masala-particle';
+                const size = Math.random() * 4 + 3; // 3-7px
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.background = masalaColors[Math.floor(Math.random() * masalaColors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+
+                // Random scatter direction
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 40 + 15;
+                particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+                particle.style.setProperty('--dy', Math.sin(angle) * distance + Math.random() * 20 + 'px');
+                particle.style.animationDuration = (Math.random() * 0.5 + 0.6) + 's';
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1200);
+            }
+        };
+
+let lastMove = 0;
         document.addEventListener('mousemove', e => {
             if (performance.now() - lastMove > 16) { // ~60fps throttle
                 lastMove = performance.now();
-                cursor.setAttribute('style', `top: ${e.pageY}px; left: ${e.pageX}px;`);
+                // Cursor uses position:fixed, so use viewport coords (clientX/clientY)
+                // to keep it tracking correctly across all sections while scrolling.
+                // Particles are absolutely positioned in body, so use page coords for them.
+cursor.setAttribute('style', `top: ${e.clientY}px; left: ${e.clientX}px;`);
+                // Sprinkle a few masala particles as the cursor moves.
+                // Particles use position:fixed, so spawn at viewport coords so
+                // the sprinkle works in every section while scrolling.
+                spawnParticles(e.clientX, e.clientY, 2);
             }
         }, { passive: true });
 
-        document.addEventListener('click', () => {
-            cursor.classList.add('expand');
+        document.addEventListener('click', e => {
+cursor.classList.add('expand');
+            // Burst of particles on click (viewport coords for fixed positioning)
+            spawnParticles(e.clientX, e.clientY, 12);
             setTimeout(() => {
                 cursor.classList.remove('expand');
-            }, 500);
+            }, 300);
         });
     }
 
-    // --- 13. FORM SUBMISSION ---
+// --- 13. FORM SUBMISSION ---
     const contactForm = document.getElementById('main-contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
-        contactForm.reset();
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+    }
+
+    // --- 14. WHATSAPP CTA RIPPLE EFFECT ---
+    document.querySelectorAll('.cta-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            ripple.className = 'cta-ripple';
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
 
 });

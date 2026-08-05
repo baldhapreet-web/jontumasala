@@ -15,8 +15,7 @@
 14. Footer
 15. Animations & Keyframes
 16. Utility & Helper Classes
-17. Dark Mode
-18. Responsive Design
+17. Responsive Design
 --- */
 
 /* 1. Global Styles & Variables */
@@ -59,22 +58,10 @@ body {
     overflow-x: hidden;
 }
 
-body.dark-mode {
-    --background-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --card-color: #2c2c2c;
-    --secondary-color: #bcaaa4;
-}
-
-
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
     color: var(--secondary-color);
     font-weight: 700;
-}
-
-body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
-    color: var(--primary-color);
 }
 
 
@@ -157,10 +144,6 @@ section {
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
 }
-body.dark-mode .btn-secondary {
-    color: var(--white);
-    border-color: var(--white);
-}
 
 .btn-secondary:hover {
     background-color: var(--secondary-color);
@@ -188,7 +171,7 @@ body.dark-mode .btn-secondary {
 }
 
 #loader .loader-logo img {
-    width: 150px;
+    width: min(70vw, 400px);
     animation: pulse 1.5s infinite ease-in-out;
 }
 
@@ -226,10 +209,7 @@ body.dark-mode .btn-secondary {
     background: #F57C00;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(90px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-body.dark-mode #header.scrolled #navbar{
-     background: rgba(20, 20, 20, 0.2);
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .brand {
@@ -309,10 +289,7 @@ body.dark-mode #header.scrolled #navbar{
     justify-content: left;
     position: relative;
     padding-top: 0px; 
-    background: url('details/homepage background .png') no-repeat center center / cover;
-}
-body.dark-mode .hero-section {
-    background: url('details/homepage background .png') no-repeat center center / cover;
+background: url('details/homepage background .png') no-repeat center center / cover;
 }
 
 /* Overlay for readability */
@@ -321,12 +298,11 @@ body.dark-mode .hero-section {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(255, 248, 232, 0.55);
     z-index: 0;
-    pointer-events: none;
-}
-body.dark-mode .hero-section::before {
-    background: rgba(10, 10, 10, 0.55);
+pointer-events: none;
 }
 
 
@@ -428,16 +404,16 @@ body.dark-mode .hero-section::before {
     background-color: #fdf2e2;
     text-align: center;
 }
-body.dark-mode .choose-us-section{
-    background-color: #222;
-}
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
     gap: 2rem;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .feature-card {
@@ -451,6 +427,10 @@ body.dark-mode .choose-us-section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    min-height: 320px;
 }
 
 .feature-card:hover {
@@ -472,45 +452,59 @@ body.dark-mode .choose-us-section{
     font-size: 1.4rem;
     color: var(--secondary-color);
 }
-body.dark-mode .feature-card h3 {
-    color: var(--white);
-}
 
 /* 7. Ingredients Section */
 .ingredients-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
     gap: 2rem;
+    justify-items: center;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .ingredient-card {
+    background-color: var(--card-color);
+    padding: 2.5rem 2rem;
     text-align: center;
-    transition: transform 0.3s;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    min-height: 280px;
 }
 
 .ingredient-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
 }
 
 .ingredient-card img {
     width: 120px;
     height: 120px;
     display: block;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1.5rem;
     object-fit: contain;
-    background: transparent; /* અથવા remove કરો */
-    border-radius: 50%;
+    background: transparent;
+border-radius: 50%;
     padding: 0;
 }
-body.dark-mode .ingredient-card img{
-    background-color: #333;
-}
 .ingredient-card h4 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
+color: var(--secondary-color);
 }
 .ingredient-card p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    color: var(--text-color);
 }
 
 /* 8. How to Use Section */
@@ -550,9 +544,6 @@ body.dark-mode .ingredient-card img{
 .product-showcase-section {
     background-color: #fdf2e2;
 }
-body.dark-mode .product-showcase-section{
-    background-color: #222;
-}
 
 .product-grid {
     display: grid;
@@ -576,15 +567,13 @@ body.dark-mode .product-showcase-section{
 
 .product-image {
     background: #fff0de;
-    padding: 2rem;
+padding: 2rem;
     transition: background 0.3s;
-}
-body.dark-mode .product-image {
-    background: #333;
 }
 .product-image img {
     transition: transform 0.3s;
-    height: 250px;
+    height: clamp(180px, 28vw, 250px);
+    object-fit: contain;
     margin: 0 auto;
 }
 .product-card:hover .product-image img {
@@ -665,9 +654,6 @@ body.dark-mode .product-image {
 .testimonials-section {
     background-color: #fdf2e2;
 }
-body.dark-mode .testimonials-section{
-    background-color: #222;
-}
 .testimonial-slider {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -687,9 +673,6 @@ body.dark-mode .testimonials-section{
 }
 .testimonial-card h4 {
     color: var(--secondary-color);
-}
-body.dark-mode .testimonial-card h4{
-    color: var(--white);
 }
 
 .testimonial-card span {
@@ -737,66 +720,295 @@ body.dark-mode .testimonial-card h4{
 }
 
 /* 13. Contact Section */
-.contact-wrapper {
+.contact-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: -2rem auto 3rem;
+    color: var(--text-color);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    background: var(--card-color);
-    padding: 3rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
     margin-bottom: 4rem;
 }
-.contact-info ul {
-    list-style: none;
-    margin-top: 1.5rem;
+
+.contact-info,
+.contact-form {
+    background: var(--card-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
-.contact-info li {
+
+.contact-info h3,
+.contact-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.contact-info-desc {
+    color: var(--text-color);
+    margin-bottom: 1.75rem;
+    font-size: 0.95rem;
+}
+
+.contact-details {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(245, 124, 0, 0.1);
+    color: var(--primary-color);
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    justify-content: center;
 }
-.contact-info li img {
-    width: 24px;
-    margin-right: 1rem;
+
+.contact-item-text {
+    display: flex;
+    flex-direction: column;
 }
-.social-media {
+
+.contact-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+}
+
+.contact-item-text a,
+.contact-item-text span {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.contact-item-text a:hover {
+    color: var(--primary-color);
+}
+
+.business-hours {
     margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
 }
-.social-media a {
-    margin-right: 1rem;
+
+.business-hours h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
 }
-.social-media img {
-    width: 30px;
-    transition: transform 0.3s;
+
+.hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
 }
-.social-media img:hover {
-    transform: scale(1.1);
+
+.social-media {
+    margin-top: 1.75rem;
+}
+
+.social-media h5 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--secondary-color);
+}
+
+.social-media-links {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.form-subtitle {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-form form {
     display: flex;
     flex-direction: column;
-}
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: var(--font-body);
-}
-body.dark-mode .contact-form input, body.dark-mode .contact-form textarea{
-    background: #444;
-    border-color: #555;
-    color: var(--text-color);
+    gap: 1.1rem;
 }
 
-.contact-form .btn {
-    align-self: flex-start;
-    border: none;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    background: var(--white);
+    color: var(--text-color);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.12);
+}
+
+.contact-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F57C00' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
     cursor: pointer;
+}
+
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn-submit:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.contact-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+}
+
+.cta-dealer {
+    background: #25D366;
+    color: var(--white);
+}
+
+.cta-dealer:hover {
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+.cta-order {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+.cta-order:hover {
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(78, 52, 46, 0.4);
+}
+
+.cta-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Ripple effect for CTA buttons */
+.cta-btn {
+    position: relative;
+    overflow: hidden;
+}
+.cta-btn .cta-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(0);
+    animation: cta-ripple 0.6s linear;
+    pointer-events: none;
+}
+@keyframes cta-ripple {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* When the contact grid holds a single child (e.g. only contact-info), span full width */
+.contact-grid > :only-child {
+    grid-column: 1 / -1;
 }
 
 .map-container {
@@ -807,20 +1019,12 @@ body.dark-mode .contact-form input, body.dark-mode .contact-form textarea{
 .map-container iframe{
     filter: grayscale(1) invert(0.9);
 }
-body.dark-mode .map-container iframe{
-    filter: grayscale(1) invert(0.9) brightness(0.5);
-}
-
 /* 14. Footer */
 #footer {
     background-color: var(--secondary-color);
     color: var(--light-gray);
     padding: 4rem 0 2rem;
 }
-body.dark-mode #footer{
-    background-color: #111;
-}
-
 .footer-content {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -839,6 +1043,13 @@ body.dark-mode #footer{
 .footer-links a {
     color: var(--light-gray);
 }
+.footer-social .social-media {
+    display: flex;
+    gap: 1rem;
+}
+.footer-social .social-media a {
+    display: inline-flex;
+}
 .footer-social .social-media img {
     width: 24px;
     filter: invert(1);
@@ -848,10 +1059,6 @@ body.dark-mode #footer{
     padding-top: 2rem;
     border-top: 1px solid #5a4a44;
 }
-body.dark-mode .footer-bottom {
-    border-top-color: #333;
-}
-
 /* 15. Animations & Keyframes */
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
@@ -904,15 +1111,49 @@ body.dark-mode .footer-bottom {
 }
 
 .custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary-color);
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, var(--primary-color) 0%, #E65100 70%);
+    border: 2px solid var(--white);
     border-radius: 50%;
     position: fixed;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10000;
-    transition: all 0.1s;
+    box-shadow: 0 0 10px rgba(245, 124, 0, 0.6);
+    transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+.custom-cursor.expand {
+    width: 34px;
+    height: 34px;
+}
+.custom-cursor::after {
+    /* tiny spice speck in the center */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Sprinkled masala particles */
+.masala-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    animation: masala-fall 0.9s ease-out forwards;
+}
+@keyframes masala-fall {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
 }
 
 #back-to-top {
@@ -927,6 +1168,9 @@ body.dark-mode .footer-bottom {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
     z-index: 998;
     transition: opacity 0.3s, visibility 0.3s;
 }
@@ -936,46 +1180,7 @@ body.dark-mode .footer-bottom {
     filter: invert(1);
 }
 
-/* 17. Dark Mode Toggle */
-.dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 120px;
-    z-index: 1000;
-}
-.dark-mode-checkbox {
-    display: none;
-}
-.dark-mode-label {
-    width: 50px;
-    height: 26px;
-    background: #444;
-    border-radius: 50px;
-    display: block;
-    position: relative;
-    cursor: pointer;
-}
-.dark-mode-label::after {
-    content: '';
-    display: block;
-    width: 22px;
-    height: 22px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: 0.3s;
-}
-.dark-mode-checkbox:checked + .dark-mode-label {
-    background: var(--primary-color);
-}
-.dark-mode-checkbox:checked + .dark-mode-label::after {
-    left: calc(100% - 2px);
-    transform: translateX(-100%);
-}
-
-/* 18. Responsive Design */
+/* 17. Responsive Design */
 @media (max-width: 1024px) {
     .hero-image {
         right: 5%;
@@ -1008,38 +1213,157 @@ body.dark-mode .footer-bottom {
     .cta-button {
         display: none;
     }
-    .testimonial-slider, .features-grid, .ingredients-grid {
+.testimonial-slider {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 }
 
+@media (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+    }
+    .feature-card {
+        max-width: 300px;
+    }
+    .ingredients-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+    }
+    .ingredient-card {
+        max-width: 300px;
+    }
+}
+
 @media (max-width: 768px) {
-    .section-title h2 { font-size: 2.5rem; }
-    .hero-section { flex-direction: column; text-align: center; justify-content: center; }
-    .hero-image { position: relative; right: auto; width: 80%; max-width: 300px; margin-top: 2rem; }
-    .main-heading { font-size: 3rem; }
-    .subheading { font-size: 1.2rem; }
-    .about-content, .contact-wrapper { grid-template-columns: 1fr; }
-    .about-image { margin-bottom: 2rem; }
-    .timeline { flex-direction: column; }
+    section { padding: 4rem 0; }
+    .section-title { margin-bottom: 3rem; }
+    .section-title h2 { font-size: 2rem; }
+
+    /* Navbar */
+    .brand { font-size: 1.1rem; }
+    .brand img { width: 32px; margin-right: 8px; }
+
+    /* Hero */
+    .hero-section { flex-direction: column; justify-content: center; text-align: center; padding-top: 6rem; }
+    .hero-content { padding: 0 1rem; }
+    .main-heading { font-size: 2.5rem; }
+    .subheading { font-size: 1.15rem; }
+    .hero-image { position: relative; right: auto; width: 75%; max-width: 280px; margin: 2.5rem auto 4rem; }
+    .scroll-indicator { bottom: 1.5rem; }
+
+/* About */
+    .about-content { grid-template-columns: 1fr; gap: 2rem; }
+    .about-image { margin-bottom: 1rem; }
+    .about-text { text-align: center; }
+    .about-text h3 { font-size: 1.8rem; }
+
+    /* Contact (keep side-by-side) */
+    .contact-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+
+    /* Timeline */
+    .timeline { flex-direction: column; gap: 1.5rem; }
     .timeline-arrow { transform: rotate(90deg); animation: none; }
+    .timeline-item { width: 100%; max-width: 360px; }
+
+    /* Grids */
     .testimonial-slider, .product-grid { grid-template-columns: 1fr; }
-    .masonry-gallery { column-count: 2; }
-    .footer-content { grid-template-columns: 1fr; }
-    .dark-mode-toggle{ top: 22px; right: 80px; }
+    .features-grid, .ingredients-grid { gap: 1.5rem; }
+    .masonry-gallery { column-count: 2; column-gap: 1rem; }
+    .gallery-item { margin-bottom: 1rem; }
+.footer-content { grid-template-columns: 1fr; gap: 2rem; }
+    .map-container iframe { height: 300px; }
 }
 
 @media (max-width: 480px) {
     html { font-size: 14px; }
-    .container { padding: 0 1rem; }
-    .section-title h2 { font-size: 2rem; }
-    .main-heading { font-size: 2.5rem; }
-    .gujarati-brand-name { font-size: 2rem; }
-    .hero-buttons .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-        margin: 0.5rem;
+    body { overflow-x: hidden; }
+    .container { padding: 0 1.1rem; }
+
+    section { padding: 3rem 0; }
+    .section-title { margin-bottom: 2.5rem; }
+    .section-title h2 { font-size: 1.7rem; }
+    .section-title span { font-size: 1rem; }
+
+    /* Navbar */
+    #navbar { padding: 0.85rem 1rem; }
+    .brand span {
+        max-width: 65vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+/* Hero */
+    .hero-section { padding-top: 5rem; }
+    .gujarati-brand-name { font-size: 1.6rem; }
+    .main-heading { font-size: 2rem; }
+    .subheading { font-size: 1.05rem; margin: 0.75rem 0 1.75rem; }
+    .hero-buttons .btn {
+        display: block;
+        width: calc(100% - 1rem);
+        max-width: 260px;
+        margin: 0.6rem auto;
+        padding: 0.85rem 1.25rem;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    .hero-image { width: 70%; max-width: 230px; margin: 2rem auto 3.5rem; }
+
+    /* Cards */
+    .features-grid, .ingredients-grid { grid-template-columns: 1fr; }
+    .feature-card, .ingredient-card {
+        max-width: 340px;
+        width: 100%;
+        min-height: 0;
+        padding: 2rem 1.5rem;
+    }
+    .feature-icon img { width: 140px; height: 140px; }
+    .ingredient-card img { width: 100px; height: 100px; }
+    .feature-card h3 { font-size: 1.25rem; }
+
+    /* Products */
+    .product-grid { gap: 2rem; }
+    .product-image { padding: 1.5rem; }
+    .product-info { padding: 1.5rem 1.25rem; }
+    .product-info h3 { font-size: 1.5rem; }
+    .product-info .btn { width: 100%; text-align: center; padding: 0.9rem 1rem; }
+
+    /* Gallery */
     .masonry-gallery { column-count: 1; }
-    #navbar { padding: 1rem; }
+
+    /* Timeline */
+    .timeline-item { padding: 1.5rem; }
+
+    /* Testimonials */
+    .testimonial-card { padding: 1.5rem; }
+
+    /* FAQ */
+    .faq-question { padding: 1.1rem; }
+    .faq-question h4 { font-size: 1rem; }
+
+/* Contact (keep side-by-side with compact sizing) */
+    .contact-intro { margin: -1rem auto 2rem; font-size: 0.95rem; }
+    .contact-grid { grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+    .contact-info, .contact-form { padding: 1.25rem 1rem; }
+    .contact-info h3, .contact-form h3 { font-size: 1.2rem; }
+    .contact-icon { width: 38px; height: 38px; }
+    .contact-item { gap: 0.6rem; }
+    .contact-item-text a, .contact-item-text span { font-size: 0.85rem; }
+    .contact-label { font-size: 0.72rem; }
+    .business-hours { margin-top: 1.25rem; padding-top: 1rem; }
+    .hours-row { font-size: 0.8rem; }
+    .social-link { width: 36px; height: 36px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-group label { font-size: 0.8rem; }
+    .contact-form input, .contact-form textarea, .contact-form select { padding: 0.7rem 0.8rem; font-size: 0.85rem; }
+    .btn-submit { width: 100%; text-align: center; padding: 0.8rem 1rem; font-size: 0.85rem; }
+    .contact-cta { gap: 0.6rem; }
+    .cta-btn { padding: 0.7rem 0.6rem; font-size: 0.8rem; }
+    .map-container iframe { height: 260px; }
+
+    /* Footer */
+    #footer { padding: 3rem 0 1.5rem; }
+
+    /* Back to top */
+    #back-to-top { bottom: 1.25rem; right: 1.25rem; width: 44px; height: 44px; }
 }

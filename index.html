@@ -14,7 +14,7 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Jontu Chhaas Masala - One Spoon, Unlimited Taste">
     <meta property="og:description" content="Experience the refreshing and authentic flavor of our premium buttermilk masala, made with the finest natural ingredients.">
-    <meta property="og:image" content="detials/WhatsApp Image 2026-08-03 at 6.16.13 PM (2).jpeg">
+    <meta property="og:image" content="details/bottle.png">
     <meta property="og:url" content="https://jontumasala.com">
     <meta property="og:type" content="website">
     
@@ -31,8 +31,8 @@
 </head>
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
+<!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
 
     <!-- Loader -->
     <div id="loader">
@@ -44,14 +44,8 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
 
-    <!-- Dark Mode Toggle -->
-    <div class="dark-mode-toggle">
-        <input type="checkbox" id="dark-mode-switch" class="dark-mode-checkbox">
-        <label for="dark-mode-switch" class="dark-mode-label"></label>
-    </div>
-    
-    <!-- Back to Top Button -->
-    <a href="#" id="back-to-top" class="hidden"></a>
+<!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="hidden" aria-label="Back to top">&#8593;</a>
 
     <header id="header">
         <nav id="navbar">
@@ -135,8 +129,8 @@
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon"><img src="details\traditional taste.png" alt="Traditional Taste"></div>
-                        <h3>Traditional Taste</h3>
-                    </div><br>
+<h3>Traditional Taste</h3>
+                    </div>
                     <div class="feature-card">
                         <div class="feature-icon"><img src="details\no atificial color.png" alt="No Artificial Color"></div>
                         <h3>No Artificial Color</h3>
@@ -362,38 +356,100 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+<!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <div class="section-title">
                     <span>Get In Touch</span>
                     <h2>Contact Us</h2>
                 </div>
-                <div class="contact-wrapper">
+                <p class="contact-intro">Have a question, want to place a bulk order, or interested in becoming a dealer? Our team is happy to help. Reach us through any of the channels below or send us a message.</p>
+
+                <div class="contact-grid">
+                    <!-- Contact Information -->
                     <div class="contact-info">
                         <h3>Contact Information</h3>
-                        <p>Have questions or want to place an order? Reach out to us!</p>
-                        <ul>
-                            <li><img src="assets/icons/phone.svg" alt="Phone"> +91 98765 43210</li>
-                            <li><img src="assets/icons/whatsapp.svg" alt="WhatsApp"> +91 98765 43210</li>
-                            <li><img src="assets/icons/email.svg" alt="Email"> contact@jontumasala.com</li>
-                            <li><img src="assets/icons/address.svg" alt="Address"> 123 Masala Street, Rajkot, Gujarat, India</li>
+                        <p class="contact-info-desc">We're here to help with product inquiries, bulk orders, and partnership opportunities.</p>
+
+                        <ul class="contact-details">
+                            <li class="contact-item">
+                                <span class="contact-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </span>
+                                <div class="contact-item-text">
+                                    <span class="contact-label">Phone</span>
+                                    <a href="tel:+917016674697">+91 70166 74697</a>
+                                </div>
+                            </li>
+                            <li class="contact-item">
+                                <span class="contact-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                </span>
+                                <div class="contact-item-text">
+                                    <span class="contact-label">WhatsApp</span>
+                                    <a href="https://wa.me/917016674697" target="_blank" rel="noopener noreferrer">+91 70166 74697</a>
+                                </div>
+                            </li>
+                            <li class="contact-item">
+                                <span class="contact-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                                </span>
+                                <div class="contact-item-text">
+                                    <span class="contact-label">Email</span>
+                                    <a href="mailto:contact@jontumasala.com">contact@jontumasala.com</a>
+                                </div>
+                            </li>
+                            <li class="contact-item">
+                                <span class="contact-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </span>
+                                <div class="contact-item-text">
+                                    <span class="contact-label">Address</span>
+                                    <span>To: sajdiyali, Tal:jamkandorana, dis: Rajkot(360405)</span>
+                                </div>
+                            </li>
                         </ul>
+
+                        <div class="business-hours">
+                            <h4>Business Hours</h4>
+                            <div class="hours-row">
+                                <span>Monday – Saturday</span>
+                                <span>9:00 AM – 8:00 PM</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Sunday</span>
+                                <span>Closed</span>
+                            </div>
+                        </div>
+
                         <div class="social-media">
-                            <a href="#"><img src="assets/icons/instagram.svg" alt="Instagram"></a>
-                            <a href="#"><img src="assets/icons/facebook.svg" alt="Facebook"></a>
+                            <h5>Follow Us</h5>
+<div class="social-media-links">
+                                <a href="#" aria-label="Instagram" class="social-link">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                </a>
+                                <a href="#" aria-label="Facebook" class="social-link">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                                </a>
+                                <a href="#" aria-label="YouTube" class="social-link">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.42 8.59.42 8.59.42s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-cta">
+                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20am%20interested%20in%20becoming%20a%20dealership%20partner.%0APlease%20share%20dealership%20details%2C%20pricing%2C%20terms%20%26%20conditions.%0A%0AThank%20you." target="_blank" rel="noopener noreferrer" class="cta-btn cta-dealer">
+                                <span class="cta-icon" aria-hidden="true">&#129309;</span>
+                                <span class="cta-text">Become a Dealer</span>
+                            </a>
+                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20want%20to%20order%20Jontu%20Chhaas%20Masala.%0APlease%20share%20product%20details%2C%20pricing%20and%20ordering%20process.%0A%0AThank%20you." target="_blank" rel="noopener noreferrer" class="cta-btn cta-order">
+                                <span class="cta-icon" aria-hidden="true">&#128722;</span>
+                                <span class="cta-text">Order Now</span>
+                            </a>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <h3>Send Us a Message</h3>
-                        <form id="main-contact-form">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                            <button type="submit" class="btn">Send Message</button>
-                        </form>
-                    </div>
                 </div>
+
                 <div class="map-container">
                     <iframe src="https://maps.app.goo.gl/XAWxF8wwBJMMd3Mv8" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -418,12 +474,18 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-social">
+<div class="footer-social">
                     <h4>Follow Us</h4>
                     <div class="social-media">
-                       <a href="#"><img src="assets/icons/instagram.svg" alt="Instagram"></a>
-                       <a href="#"><img src="assets/icons/facebook.svg" alt="Facebook"></a>
-                       <a href="#"><img src="assets/icons/whatsapp.svg" alt="WhatsApp"></a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
