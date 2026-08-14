@@ -271,6 +271,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 .hamburger {
     display: none;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
 }
 .hamburger span {
     display: block;
@@ -279,6 +282,15 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     margin: 5px 0;
     background: var(--text-color);
     transition: all 0.3s ease-in-out;
+}
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* 4. Hero Section */
@@ -289,7 +301,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     justify-content: left;
     position: relative;
     padding-top: 0px; 
-background: url('details/homepage background .png') no-repeat center center / cover;
+background: url('details/homepage-background.jpg') no-repeat center center / cover;
 }
 
 /* Overlay for readability */
@@ -648,6 +660,10 @@ padding: 2rem;
     font-size: 3rem;
     color: var(--white);
     cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 0.5rem;
 }
 
 /* 11. Testimonials Section */
@@ -857,6 +873,18 @@ padding: 2rem;
     transform: translateY(-3px);
 }
 
+.social-link[aria-disabled="true"],
+.footer-social .social-media a[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.social-link[aria-disabled="true"]:hover,
+.footer-social .social-media a[aria-disabled="true"]:hover {
+    background: var(--secondary-color);
+    transform: none;
+}
+
 .form-subtitle {
     color: var(--text-color);
     font-size: 0.9rem;
@@ -907,6 +935,26 @@ padding: 2rem;
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.12);
+}
+
+.contact-form input.invalid,
+.contact-form textarea.invalid {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+}
+
+.form-error {
+    display: block;
+    min-height: 1.1rem;
+    color: #d32f2f;
+    font-size: 0.8rem;
+}
+
+.form-success {
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .contact-form select {
@@ -1102,6 +1150,24 @@ padding: 2rem;
         transform: none !important;
         opacity: 1 !important;
     }
+    .custom-cursor, .masala-particle, .cta-ripple {
+        display: none !important;
+        animation: none !important;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Visible keyboard focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.faq-question:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 
@@ -1122,10 +1188,22 @@ padding: 2rem;
     z-index: 10000;
     box-shadow: 0 0 10px rgba(245, 124, 0, 0.6);
     transition: width 0.2s, height 0.2s, opacity 0.2s;
+    opacity: 0;
+}
+.custom-cursor.ready {
+    opacity: 1;
 }
 .custom-cursor.expand {
     width: 34px;
     height: 34px;
+}
+
+/* Custom cursor and masala sprinkle are desktop-only decorative effects */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+    .custom-cursor,
+    .masala-particle {
+        display: none !important;
+    }
 }
 .custom-cursor::after {
     /* tiny spice speck in the center */

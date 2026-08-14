@@ -1,43 +1,76 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Jontu Chhaas Masala - One Spoon, Unlimited Taste</title>
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Discover the premium taste of Jontu Chhaas Masala, a traditional blend of natural and organic spices. One spoon is all you need for unlimited taste.">
     <meta name="keywords" content="Jontu Chhaas Masala, chhaas masala, buttermilk masala, premium spices, organic masala, traditional recipe, natural ingredients">
     <meta name="author" content="Jontu Chhaas Masala">
-    
+    <link rel="canonical" href="https://jontumasala.com/">
+
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Jontu Chhaas Masala - One Spoon, Unlimited Taste">
     <meta property="og:description" content="Experience the refreshing and authentic flavor of our premium buttermilk masala, made with the finest natural ingredients.">
-    <meta property="og:image" content="details/bottle.png">
+    <meta property="og:image" content="https://jontumasala.com/details/bottle.png">
     <meta property="og:url" content="https://jontumasala.com">
     <meta property="og:type" content="website">
-    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jontu Chhaas Masala - One Spoon, Unlimited Taste">
+    <meta name="twitter:description" content="Traditional buttermilk masala made with 100% natural ingredients.">
+    <meta name="twitter:image" content="https://jontumasala.com/details/bottle.png">
+
     <!-- Favicon -->
-    <link rel="icon" href="details/logo.png" type="image/x-icon">
-    
+    <link rel="icon" href="details/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="details/logo.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    
+
+    <!-- Preload critical above-the-fold assets -->
+    <link rel="preload" as="image" href="details/homepage-background.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="details/bottle.webp" type="image/webp" fetchpriority="high">
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Jontu Chhaas Masala",
+        "image": "https://jontumasala.com/details/bottle.png",
+        "telephone": "+91-70166-74697",
+        "url": "https://jontumasala.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sajdiyali, Tal. Jamkandorana",
+            "addressLocality": "Rajkot",
+            "addressRegion": "Gujarat",
+            "postalCode": "360405",
+            "addressCountry": "IN"
+        }
+    }
+    </script>
 </head>
 <body>
 
 <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
+    <div class="custom-cursor" aria-hidden="true"></div>
 
     <!-- Loader -->
-    <div id="loader">
+    <div id="loader" role="status" aria-live="polite" aria-label="Loading Jontu Chhaas Masala">
         <div class="loader-logo">
-            <img src="details/logo.png" alt="Jontu Chhaas Masala Logo">
+            <picture>
+                <source srcset="details/logo.webp" type="image/webp">
+                <img src="details/logo.png" alt="Jontu Chhaas Masala Logo" width="600" height="542" fetchpriority="high">
+            </picture>
         </div>
     </div>
 
@@ -50,10 +83,13 @@
     <header id="header">
         <nav id="navbar">
             <a href="#" class="brand">
-                <img src="details/logo.png" alt="Logo">
+                <picture>
+                    <source srcset="details/logo.webp" type="image/webp">
+                    <img src="details/logo.png" alt="Jontu Chhaas Masala Logo" width="600" height="542">
+                </picture>
                 <span>Jontu Chhaas Masala</span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#products" class="nav-link">Products</a></li>
@@ -62,11 +98,11 @@
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button type="button" class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
@@ -74,7 +110,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero-section">
             <div class="hero-content">
-                <h2 class="gujarati-brand-name">જોન્ટુ છાસ મસાલા</h2>
+                <h2 class="gujarati-brand-name" lang="gu">જોન્ટુ છાસ મસાલા</h2>
                 <h1 class="main-heading">Premium Chhaas Masala</h1>
                 <p class="subheading">Traditional Taste with Natural Ingredients</p>
                 <div class="hero-buttons">
@@ -83,9 +119,12 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="details\bottle.png" alt="Jontu Chhaas Masala Bottle" class="floating-bottle">
+                <picture>
+                    <source srcset="details/bottle.webp" type="image/webp">
+                    <img src="details/bottle.png" alt="Jontu Chhaas Masala Bottle" class="floating-bottle" width="900" height="424" fetchpriority="high">
+                </picture>
             </div>
-<a href="#about" class="scroll-indicator">
+            <a href="#about" class="scroll-indicator">
                 <span></span>
                 Scroll Down
             </a>
@@ -100,7 +139,7 @@
                 </div>
                 <div class="about-content">
                     <div class="about-image reveal-left">
-                        <img src="details\natural element.png" alt="Natural Ingredients">
+                        <img src="details/natural-element.jpg" alt="Natural Ingredients used in Jontu Chhaas Masala" width="1100" height="733" loading="lazy" decoding="async">
                     </div>
                     <div class="about-text reveal-right">
                         <h3>A Recipe Passed Through Generations</h3>
@@ -120,27 +159,57 @@
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\100% natural.png" alt="100% Natural"></div>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/100% natural.webp" type="image/webp">
+                                <img src="details/100% natural.png" alt="100% Natural" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
                         <h3>100% Natural</h3>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\premium quality.png" alt="Premium Quality"></div>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/premium quality.webp" type="image/webp">
+                                <img src="details/premium quality.png" alt="Premium Quality" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
                         <h3>Premium Quality</h3>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\traditional taste.png" alt="Traditional Taste"></div>
-<h3>Traditional Taste</h3>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/traditional taste.webp" type="image/webp">
+                                <img src="details/traditional taste.png" alt="Traditional Taste" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
+                        <h3>Traditional Taste</h3>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\no atificial color.png" alt="No Artificial Color"></div>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/no atificial color.webp" type="image/webp">
+                                <img src="details/no atificial color.png" alt="No Artificial Color" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
                         <h3>No Artificial Color</h3>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\no preservaties .png" alt="No Preservatives"></div>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/no preservaties .webp" type="image/webp">
+                                <img src="details/no preservaties .png" alt="No Preservatives" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
                         <h3>No Preservatives</h3>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon"><img src="details\made in india.png" alt="Made in India"></div>
+                        <div class="feature-icon">
+                            <picture>
+                                <source srcset="details/made in india.webp" type="image/webp">
+                                <img src="details/made in india.png" alt="Made in India" width="500" height="333" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
                         <h3>Made in India</h3>
                     </div>
                 </div>
@@ -156,39 +225,57 @@
                 </div>
                 <div class="ingredients-grid">
                     <div class="ingredient-card">
-                        <img src="details\mint.png" alt="Mint">
+                        <picture>
+                            <source srcset="details/mint.webp" type="image/webp">
+                            <img src="details/mint.png" alt="Mint" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Mint</h4>
                         <p>Adds a cool and refreshing aroma.</p>
                     </div>
                     <div class="ingredient-card">
-                        <img src="details\black salt.png" alt="Black Salt">
+                        <picture>
+                            <source srcset="details/black salt.webp" type="image/webp">
+                            <img src="details/black salt.png" alt="Black Salt" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Black Salt</h4>
                         <p>Provides a unique tangy flavor.</p>
                     </div>
                     <div class="ingredient-card">
-                        <img src="details\coriander.png" alt="Coriander">
+                        <picture>
+                            <source srcset="details/coriander.webp" type="image/webp">
+                            <img src="details/coriander.png" alt="Coriander" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Coriander</h4>
                         <p>For a mild, citrusy taste.</p>
                     </div>
                     <div class="ingredient-card">
-                        <img src="details\cumin.png" alt="Cumin">
+                        <picture>
+                            <source srcset="details/cumin.webp" type="image/webp">
+                            <img src="details/cumin.png" alt="Cumin" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Cumin</h4>
                         <p>Gives a warm, earthy essence.</p>
                     </div>
                     <div class="ingredient-card">
-                        <img src="details\black paper.png" alt="Black Pepper">
+                        <picture>
+                            <source srcset="details/black paper.webp" type="image/webp">
+                            <img src="details/black paper.png" alt="Black Pepper" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Black Pepper</h4>
                         <p>For a subtle, spicy kick.</p>
                     </div>
                     <div class="ingredient-card">
-                        <img src="details\salt.png" alt="Salt">
+                        <picture>
+                            <source srcset="details/salt.webp" type="image/webp">
+                            <img src="details/salt.png" alt="Salt" width="500" height="333" loading="lazy" decoding="async">
+                        </picture>
                         <h4>Salt</h4>
                         <p>Balances all the flavors perfectly.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- How To Use Section -->
         <section id="how-to-use" class="how-to-use-section">
             <div class="container">
@@ -203,14 +290,14 @@
                             <p>Take one glass of chilled buttermilk.</p>
                         </div>
                     </div>
-                    <div class="timeline-arrow">↓</div>
+                    <div class="timeline-arrow" aria-hidden="true">↓</div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <h3>Step 2</h3>
                             <p>Add one spoon of Jontu Chhaas Masala.</p>
                         </div>
                     </div>
-                    <div class="timeline-arrow">↓</div>
+                    <div class="timeline-arrow" aria-hidden="true">↓</div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <h3>Step 3</h3>
@@ -230,8 +317,8 @@
                 </div>
                 <div class="product-grid">
                     <div class="product-card">
-<div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM (2).jpeg" alt="Jontu Chhaas Masala 100g" loading="lazy">
+                        <div class="product-image">
+                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM (2).jpeg" alt="Jontu Chhaas Masala 100g Pack" width="960" height="1280" loading="lazy" decoding="async">
                         </div>
                         <div class="product-info">
                             <h3>100g Pack</h3>
@@ -241,8 +328,8 @@
                         </div>
                     </div>
                      <div class="product-card">
-<div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM.jpeg" alt="Jontu Chhaas Masala 250g" loading="lazy">
+                        <div class="product-image">
+                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM.jpeg" alt="Jontu Chhaas Masala 250g Pack" width="960" height="1280" loading="lazy" decoding="async">
                         </div>
                         <div class="product-info">
                             <h3>250g Pack</h3>
@@ -252,8 +339,8 @@
                         </div>
                     </div>
                      <div class="product-card">
-<div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.13 PM (1).jpeg" alt="Jontu Chhaas Masala 1kg" loading="lazy">
+                        <div class="product-image">
+                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.13 PM (1).jpeg" alt="Jontu Chhaas Masala 1kg Bulk Pack" width="960" height="1280" loading="lazy" decoding="async">
                         </div>
                         <div class="product-info">
                             <h3>1kg Bulk Pack</h3>
@@ -273,21 +360,21 @@
                     <span>Visuals</span>
                     <h2>A Glimpse of Our World</h2>
                 </div>
-<div class="masonry-gallery">
-                    <div class="gallery-item"><img src="details\gallery image 2.jpeg" alt="Gallery Image 1" data-src="details\gallery image 2.jpeg" loading="lazy"></div>
-                    <div class="gallery-item"><img src="details\gallery image 1.jpeg" alt="Gallery Image 2" data-src="details\gallery image 1.jpeg" loading="lazy"></div>
-                    <div class="gallery-item"><img src="details\gallery image 3.jpeg" alt="Gallery Image 3" data-src="details\gallery image 3.jpeg" loading="lazy"></div>
-                    <div class="gallery-item"><img src="details\gallery image 4.jpeg" alt="Gallery Image 4" data-src="details\gallery image 4.jpeg" loading="lazy"></div>
-                    <div class="gallery-item"><img src="details\gallery image 5.png" alt="Gallery Image 5" data-src="details\gallery image 5.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="details\gallery image 6.jpeg" alt="Gallery Image 6" data-src="details\gallery image 6.jpeg" loading="lazy"></div>
+                <div class="masonry-gallery">
+                    <div class="gallery-item"><img src="details/gallery image 2.jpeg" alt="Jontu Chhaas Masala gallery photo 1" width="509" height="504" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="details/gallery image 1.jpeg" alt="Jontu Chhaas Masala gallery photo 2" width="515" height="507" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="details/gallery image 3.jpeg" alt="Jontu Chhaas Masala gallery photo 3" width="505" height="510" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="details/gallery image 4.jpeg" alt="Jontu Chhaas Masala gallery photo 4" width="505" height="510" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="details/gallery image 5.png" alt="Jontu Chhaas Masala gallery photo 5" width="508" height="510" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="details/gallery image 6.jpeg" alt="Jontu Chhaas Masala gallery photo 6" width="514" height="510" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </section>
-        
+
         <!-- Lightbox -->
-        <div id="lightbox" class="hidden">
-            <span class="close-lightbox">&times;</span>
-            <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox" class="hidden" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
+            <button type="button" class="close-lightbox" aria-label="Close image preview">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
         </div>
 
         <!-- Testimonials Section -->
@@ -326,27 +413,27 @@
                 </div>
                 <div class="faq-accordion">
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                             <h4>What makes Jontu Chhaas Masala special?</h4>
-                            <span class="faq-icon">+</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
                         </div>
                         <div class="faq-answer">
                             <p>Our masala is made from a traditional family recipe using 100% natural and premium quality ingredients, with no artificial colors or preservatives. This ensures an authentic and superior taste.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                             <h4>Is this product available for bulk purchase?</h4>
-                            <span class="faq-icon">+</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
                         </div>
                         <div class="faq-answer">
                             <p>Yes, we offer bulk packaging for restaurants, hotels, and caterers. Please get in touch with us through our contact form for wholesale inquiries.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                             <h4>How should I store the masala?</h4>
-                            <span class="faq-icon">+</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
                         </div>
                         <div class="faq-answer">
                             <p>To maintain its freshness and aroma, store the masala in a cool, dry place away from direct sunlight. Ensure the container is tightly sealed.</p>
@@ -356,7 +443,7 @@
             </div>
         </section>
 
-<!-- Contact Section -->
+        <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <div class="section-title">
@@ -424,34 +511,77 @@
 
                         <div class="social-media">
                             <h5>Follow Us</h5>
-<div class="social-media-links">
-                                <a href="#" aria-label="Instagram" class="social-link">
+                            <div class="social-media-links">
+                                <a href="#" aria-label="Instagram (coming soon)" aria-disabled="true" title="Coming soon" class="social-link">
                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                                 </a>
-                                <a href="#" aria-label="Facebook" class="social-link">
+                                <a href="#" aria-label="Facebook (coming soon)" aria-disabled="true" title="Coming soon" class="social-link">
                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                                 </a>
-                                <a href="#" aria-label="YouTube" class="social-link">
+                                <a href="#" aria-label="YouTube (coming soon)" aria-disabled="true" title="Coming soon" class="social-link">
                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.42 8.59.42 8.59.42s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
                                 </a>
                             </div>
                         </div>
 
                         <div class="contact-cta">
-                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20am%20interested%20in%20becoming%20a%20dealership%20partner.%0APlease%20share%20dealership%20details%2C%20pricing%2C%20terms%20%26%20conditions.%0A%0AThank%20you." target="_blank" rel="noopener noreferrer" class="cta-btn cta-dealer">
+                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20am%20interested%20in%20becoming%20a%20dealership%20partner.%0APlease%20share%20dealership%20details%2C%20pricing%2C%20terms%20and%20conditions." target="_blank" rel="noopener noreferrer" class="cta-btn cta-dealer">
                                 <span class="cta-icon" aria-hidden="true">&#129309;</span>
                                 <span class="cta-text">Become a Dealer</span>
                             </a>
-                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20want%20to%20order%20Jontu%20Chhaas%20Masala.%0APlease%20share%20product%20details%2C%20pricing%20and%20ordering%20process.%0A%0AThank%20you." target="_blank" rel="noopener noreferrer" class="cta-btn cta-order">
+                            <a href="https://wa.me/917016674697?text=Hello%20Jontu%20Chhaas%20Masala%20Team%2C%0A%0AI%20want%20to%20order%20Jontu%20Chhaas%20Masala.%0APlease%20share%20product%20details%2C%20pricing%20and%20ordering%20process." target="_blank" rel="noopener noreferrer" class="cta-btn cta-order">
                                 <span class="cta-icon" aria-hidden="true">&#128722;</span>
                                 <span class="cta-text">Order Now</span>
                             </a>
                         </div>
                     </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <p class="form-subtitle">Fill in your details and we'll get back to you — your message will be sent to us directly via WhatsApp.</p>
+                        <form id="main-contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cf-name">Full Name</label>
+                                    <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required>
+                                    <span class="form-error" id="cf-name-error" role="alert"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cf-phone">Phone Number</label>
+                                    <input type="tel" id="cf-phone" name="phone" placeholder="Your mobile number" autocomplete="tel" inputmode="tel" required>
+                                    <span class="form-error" id="cf-phone-error" role="alert"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-email">Email Address</label>
+                                <input type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                                <span class="form-error" id="cf-email-error" role="alert"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-subject">Subject</label>
+                                <select id="cf-subject" name="subject">
+                                    <option value="Product Inquiry">Product Inquiry</option>
+                                    <option value="Bulk Order">Bulk Order</option>
+                                    <option value="Dealership">Dealership</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-message">Message</label>
+                                <textarea id="cf-message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+                                <span class="form-error" id="cf-message-error" role="alert"></span>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <span>Send via WhatsApp</span>
+                            </button>
+                            <p class="form-success hidden" id="cf-success" role="status">Thank you! We're opening WhatsApp so you can send your message.</p>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="map-container">
-                    <iframe src="https://maps.app.goo.gl/XAWxF8wwBJMMd3Mv8" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps?q=Sajdiyali%2C%20Tal.%20Jamkandorana%2C%20Dist.%20Rajkot%2C%20Gujarat%20360405%2C%20India&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Jontu Chhaas Masala location map"></iframe>
                 </div>
             </div>
         </section>
@@ -474,16 +604,16 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-<div class="footer-social">
+                <div class="footer-social">
                     <h4>Follow Us</h4>
                     <div class="social-media">
-                        <a href="#" aria-label="Instagram">
+                        <a href="#" aria-label="Instagram (coming soon)" aria-disabled="true" title="Coming soon">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                         </a>
-                        <a href="#" aria-label="Facebook">
+                        <a href="#" aria-label="Facebook (coming soon)" aria-disabled="true" title="Coming soon">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
-                        <a href="#" aria-label="WhatsApp">
+                        <a href="https://wa.me/917016674697" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                         </a>
                     </div>

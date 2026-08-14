@@ -6,8 +6,7 @@ This is a premium, modern, and fully responsive website for the brand "Jontu Chh
 
 -   **Stunning Design:** A luxurious and professional look that reflects the premium quality of the brand.
 -   **Fully Responsive:** Perfect viewing experience on all devices, from mobile phones to desktops.
--   **Smooth Animations:** Engaging animations and transitions throughout the site, built with CSS and JavaScript.
--   **Dark Mode:** A beautiful dark theme for comfortable viewing in low-light conditions.
+-   **Smooth Animations:** Engaging animations and transitions throughout the site, built with CSS and JavaScript, and respectful of `prefers-reduced-motion`.
 -   **SEO Optimized:** Built with SEO best practices, including semantic HTML, meta tags, and a sitemap.
 -   **Performance Focused:** Optimized for fast loading times with lazy-loaded images and clean code.
 -   **No Frameworks:** Built with just HTML, CSS, and Vanilla JS - no jQuery, Bootstrap, or other libraries.
@@ -38,11 +37,9 @@ This is a premium, modern, and fully responsive website for the brand "Jontu Chh
 ├── README.md
 ├── robots.txt
 ├── sitemap.xml
-├── 404.html
-└── assets/
-    ├── images/ (Product photos, gallery images, logo)
-    ├── icons/ (SVG icons for features, social media, etc.)
-    └── fonts/ (Custom fonts if any)
+└── details/
+    (Product photos, gallery images, ingredient/feature icons, logo, and
+    hero images — PNG/JPEG originals plus WebP variants used via <picture>)
 ```
 
 ## How to Run
