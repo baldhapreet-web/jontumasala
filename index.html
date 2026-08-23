@@ -39,6 +39,20 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- If JavaScript is disabled, keep the loader/header/hero text usable rather than stuck hidden -->
+    <noscript>
+        <style>
+            #loader { display: none !important; }
+            #header, .hero-reveal-item,
+            .feature-card, .ingredient-card, .product-card, .gallery-item,
+            .reveal-left, .reveal-right, .about-content, .faq-item, .contact-grid {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .testimonial-card { position: relative !important; opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -109,20 +123,31 @@
     <main>
         <!-- Hero Section -->
         <section id="home" class="hero-section">
+            <div class="hero-bg-parallax" id="hero-bg-parallax" aria-hidden="true"></div>
             <div class="hero-content">
-                <h2 class="gujarati-brand-name" lang="gu">જોન્ટુ છાસ મસાલા</h2>
-                <h1 class="main-heading">Premium Chhaas Masala</h1>
-                <p class="subheading">Traditional Taste with Natural Ingredients</p>
-                <div class="hero-buttons">
+                <h2 class="gujarati-brand-name hero-reveal-item" lang="gu">જોન્ટુ છાસ મસાલા</h2>
+                <h1 class="main-heading hero-reveal-item">Premium Chhaas Masala</h1>
+                <p class="subheading hero-reveal-item">Traditional Taste with Natural Ingredients</p>
+                <div class="hero-buttons hero-reveal-item">
                     <a href="#products" class="btn btn-primary">Explore Products</a>
                     <a href="#contact" class="btn btn-secondary">Contact Now</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <picture>
-                    <source srcset="details/bottle.webp" type="image/webp">
-                    <img src="details/bottle.png" alt="Jontu Chhaas Masala Bottle" class="floating-bottle" width="900" height="424" fetchpriority="high">
-                </picture>
+            <div class="hero-image" id="hero-tilt-stage">
+                <span class="hero-mint-leaf leaf-1" aria-hidden="true"></span>
+                <span class="hero-mint-leaf leaf-2" aria-hidden="true"></span>
+                <span class="hero-mint-leaf leaf-3" aria-hidden="true"></span>
+                <span class="hero-spice-particles" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+                <div class="hero-bottle-shadow" aria-hidden="true"></div>
+                <div class="hero-bottle-tilt" id="hero-bottle-tilt">
+                    <picture>
+                        <source srcset="details/bottle.webp" type="image/webp">
+                        <img src="details/bottle.png" alt="Jontu Chhaas Masala Bottle" class="floating-bottle" width="900" height="424" fetchpriority="high">
+                    </picture>
+                    <span class="hero-bottle-shine" aria-hidden="true"></span>
+                </div>
             </div>
             <a href="#about" class="scroll-indicator">
                 <span></span>
@@ -161,7 +186,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/100% natural.webp" type="image/webp">
+                                <source srcset="details/100%25%20natural.webp" type="image/webp">
                                 <img src="details/100% natural.png" alt="100% Natural" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -170,7 +195,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/premium quality.webp" type="image/webp">
+                                <source srcset="details/premium%20quality.webp" type="image/webp">
                                 <img src="details/premium quality.png" alt="Premium Quality" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -179,7 +204,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/traditional taste.webp" type="image/webp">
+                                <source srcset="details/traditional%20taste.webp" type="image/webp">
                                 <img src="details/traditional taste.png" alt="Traditional Taste" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -188,7 +213,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/no atificial color.webp" type="image/webp">
+                                <source srcset="details/no%20atificial%20color.webp" type="image/webp">
                                 <img src="details/no atificial color.png" alt="No Artificial Color" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -197,7 +222,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/no preservaties .webp" type="image/webp">
+                                <source srcset="details/no%20preservaties%20.webp" type="image/webp">
                                 <img src="details/no preservaties .png" alt="No Preservatives" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -206,7 +231,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">
                             <picture>
-                                <source srcset="details/made in india.webp" type="image/webp">
+                                <source srcset="details/made%20in%20india.webp" type="image/webp">
                                 <img src="details/made in india.png" alt="Made in India" width="500" height="333" loading="lazy" decoding="async">
                             </picture>
                         </div>
@@ -234,7 +259,7 @@
                     </div>
                     <div class="ingredient-card">
                         <picture>
-                            <source srcset="details/black salt.webp" type="image/webp">
+                            <source srcset="details/black%20salt.webp" type="image/webp">
                             <img src="details/black salt.png" alt="Black Salt" width="500" height="333" loading="lazy" decoding="async">
                         </picture>
                         <h4>Black Salt</h4>
@@ -258,7 +283,7 @@
                     </div>
                     <div class="ingredient-card">
                         <picture>
-                            <source srcset="details/black paper.webp" type="image/webp">
+                            <source srcset="details/black%20paper.webp" type="image/webp">
                             <img src="details/black paper.png" alt="Black Pepper" width="500" height="333" loading="lazy" decoding="async">
                         </picture>
                         <h4>Black Pepper</h4>
@@ -283,25 +308,66 @@
                     <span>Simple Steps</span>
                     <h2>How to Make Perfect Chhaas</h2>
                 </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Step 1</h3>
-                            <p>Take one glass of chilled buttermilk.</p>
+
+                <!-- Scroll-driven story: the visual reacts to which step is in view (no scroll-jacking, native scroll) -->
+                <div class="chhaas-story" id="chhaas-story">
+                    <div class="story-visual-wrap">
+                        <div class="story-visual" aria-hidden="true">
+                            <div class="story-spoon">
+                                <svg viewBox="0 0 60 140" width="60" height="140">
+                                    <ellipse cx="30" cy="22" rx="22" ry="18" fill="#C9C9C9" stroke="#9E9E9E" stroke-width="1.5"/>
+                                    <ellipse cx="30" cy="22" rx="16" ry="12" fill="#E8E8E8"/>
+                                    <rect x="26" y="36" width="8" height="98" rx="4" fill="#B8B8B8"/>
+                                </svg>
+                                <div class="story-masala-heap"></div>
+                            </div>
+                            <div class="story-particles" id="story-particles"></div>
+                            <div class="story-glass">
+                                <div class="story-liquid"></div>
+                                <div class="story-swirl"></div>
+                                <div class="story-mint-garnish">
+                                    <span class="story-leaf"></span>
+                                    <span class="story-leaf"></span>
+                                </div>
+                                <div class="story-shine"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-arrow" aria-hidden="true">↓</div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Step 2</h3>
-                            <p>Add one spoon of Jontu Chhaas Masala.</p>
+                    <div class="story-steps">
+                        <div class="story-step" data-step="1">
+                            <span class="story-step-num">1</span>
+                            <div class="story-step-text">
+                                <h3>Step 1</h3>
+                                <p>Take one glass of chilled buttermilk.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-arrow" aria-hidden="true">↓</div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Step 3</h3>
-                            <p>Mix well, and your delicious chhaas is ready to enjoy.</p>
+                        <div class="story-step" data-step="2">
+                            <span class="story-step-num">2</span>
+                            <div class="story-step-text">
+                                <h3>Step 2</h3>
+                                <p>Add one spoon of Jontu Chhaas Masala.</p>
+                            </div>
+                        </div>
+                        <div class="story-step" data-step="3">
+                            <span class="story-step-num">3</span>
+                            <div class="story-step-text">
+                                <h3>Step 3</h3>
+                                <p>Mix well, and your delicious chhaas is ready to enjoy.</p>
+                            </div>
+                        </div>
+                        <div class="story-step" data-step="4">
+                            <span class="story-step-num">4</span>
+                            <div class="story-step-text">
+                                <h3>Garnish</h3>
+                                <p>Top it with fresh mint leaves for an aromatic finish.</p>
+                            </div>
+                        </div>
+                        <div class="story-step" data-step="5">
+                            <span class="story-step-num">5</span>
+                            <div class="story-step-text">
+                                <h3>Serve Chilled</h3>
+                                <p>Your refreshing, authentic Jontu chhaas is ready to enjoy.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -315,40 +381,49 @@
                     <span>Our Products</span>
                     <h2>Choose Your Pack</h2>
                 </div>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM (2).jpeg" alt="Jontu Chhaas Masala 100g Pack" width="960" height="1280" loading="lazy" decoding="async">
+                <div class="product-carousel" id="product-carousel">
+                    <button type="button" class="carousel-nav product-prev" id="product-prev" aria-label="Previous product">&#10094;</button>
+                    <div class="product-grid" id="product-track">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM (2).jpeg" alt="Jontu Chhaas Masala 100g Pack" width="960" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>100g Pack</h3>
+                                <p>Perfect for personal use and small families.</p>
+                                <span class="price">₹50</span>
+                                <a href="#contact" class="btn">Order Now</a>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h3>100g Pack</h3>
-                            <p>Perfect for personal use and small families.</p>
-                            <span class="price">₹50</span>
-                            <a href="#contact" class="btn">Order Now</a>
+                         <div class="product-card">
+                            <div class="product-image">
+                                <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM.jpeg" alt="Jontu Chhaas Masala 250g Pack" width="960" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>250g Pack</h3>
+                                <p>Ideal for regular chhaas lovers and larger families.</p>
+                                 <span class="price">₹120</span>
+                                <a href="#contact" class="btn">Order Now</a>
+                            </div>
+                        </div>
+                         <div class="product-card">
+                            <div class="product-image">
+                                <img src="details/WhatsApp Image 2026-08-03 at 6.16.13 PM (1).jpeg" alt="Jontu Chhaas Masala 1kg Bulk Pack" width="960" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <div class="product-info">
+                                <h3>1kg Bulk Pack</h3>
+                                <p>Best for restaurants, hotels, and events.</p>
+                                 <span class="price">₹450</span>
+                                <a href="#contact" class="btn">Order Now</a>
+                            </div>
                         </div>
                     </div>
-                     <div class="product-card">
-                        <div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.12 PM.jpeg" alt="Jontu Chhaas Masala 250g Pack" width="960" height="1280" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-info">
-                            <h3>250g Pack</h3>
-                            <p>Ideal for regular chhaas lovers and larger families.</p>
-                             <span class="price">₹120</span>
-                            <a href="#contact" class="btn">Order Now</a>
-                        </div>
-                    </div>
-                     <div class="product-card">
-                        <div class="product-image">
-                            <img src="details/WhatsApp Image 2026-08-03 at 6.16.13 PM (1).jpeg" alt="Jontu Chhaas Masala 1kg Bulk Pack" width="960" height="1280" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-info">
-                            <h3>1kg Bulk Pack</h3>
-                            <p>Best for restaurants, hotels, and events.</p>
-                             <span class="price">₹450</span>
-                            <a href="#contact" class="btn">Order Now</a>
-                        </div>
-                    </div>
+                    <button type="button" class="carousel-nav product-next" id="product-next" aria-label="Next product">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="product-dots">
+                    <button type="button" class="carousel-dot active" data-index="0" aria-label="Show 100g Pack"></button>
+                    <button type="button" class="carousel-dot" data-index="1" aria-label="Show 250g Pack"></button>
+                    <button type="button" class="carousel-dot" data-index="2" aria-label="Show 1kg Bulk Pack"></button>
                 </div>
             </div>
         </section>
@@ -374,7 +449,9 @@
         <!-- Lightbox -->
         <div id="lightbox" class="hidden" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
             <button type="button" class="close-lightbox" aria-label="Close image preview">&times;</button>
+            <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">&#10094;</button>
             <img class="lightbox-content" id="lightbox-img" alt="">
+            <button type="button" class="lightbox-nav lightbox-next" aria-label="Next image">&#10095;</button>
         </div>
 
         <!-- Testimonials Section -->
@@ -384,22 +461,31 @@
                     <span>Happy Customers</span>
                     <h2>What People Are Saying</h2>
                 </div>
-                <div class="testimonial-slider">
-                    <div class="testimonial-card">
-                        <p>"The best chhaas masala I have ever tasted! It's a staple in my kitchen now. The flavor is so authentic and refreshing."</p>
-                        <h4>- Priya S.</h4>
-                        <span>Food Blogger</span>
+                <div class="testimonial-carousel" id="testimonial-carousel">
+                    <button type="button" class="carousel-nav testimonial-prev" id="testimonial-prev" aria-label="Previous testimonial">&#10094;</button>
+                    <div class="testimonial-track" id="testimonial-track">
+                        <div class="testimonial-card">
+                            <p>"The best chhaas masala I have ever tasted! It's a staple in my kitchen now. The flavor is so authentic and refreshing."</p>
+                            <h4>- Priya S.</h4>
+                            <span>Food Blogger</span>
+                        </div>
+                        <div class="testimonial-card">
+                            <p>"Our restaurant customers love the chhaas we make with Jontu Masala. It has a premium taste that stands out."</p>
+                            <h4>- Ramesh K.</h4>
+                            <span>Restaurant Owner</span>
+                        </div>
+                        <div class="testimonial-card">
+                            <p>"Finally, a masala without any artificial colors or preservatives. You can taste the quality of the natural ingredients."</p>
+                            <h4>- Anjali P.</h4>
+                            <span>Homemaker</span>
+                        </div>
                     </div>
-                    <div class="testimonial-card">
-                        <p>"Our restaurant customers love the chhaas we make with Jontu Masala. It has a premium taste that stands out."</p>
-                        <h4>- Ramesh K.</h4>
-                        <span>Restaurant Owner</span>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"Finally, a masala without any artificial colors or preservatives. You can taste the quality of the natural ingredients."</p>
-                        <h4>- Anjali P.</h4>
-                        <span>Homemaker</span>
-                    </div>
+                    <button type="button" class="carousel-nav testimonial-next" id="testimonial-next" aria-label="Next testimonial">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="testimonial-dots">
+                    <button type="button" class="carousel-dot active" data-index="0" aria-label="Show testimonial from Priya S."></button>
+                    <button type="button" class="carousel-dot" data-index="1" aria-label="Show testimonial from Ramesh K."></button>
+                    <button type="button" class="carousel-dot" data-index="2" aria-label="Show testimonial from Anjali P."></button>
                 </div>
             </div>
         </section>
@@ -468,7 +554,7 @@
                                     <a href="tel:+917016674697">+91 70166 74697</a>
                                 </div>
                             </li>
-                            <li class="contact-item">
+                            <li class="contact-item contact-item-whatsapp">
                                 <span class="contact-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                                 </span>
@@ -613,7 +699,7 @@
                         <a href="#" aria-label="Facebook (coming soon)" aria-disabled="true" title="Coming soon">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
-                        <a href="https://wa.me/917016674697" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <a href="https://wa.me/917016674697" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="whatsapp-pulse">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                         </a>
                     </div>

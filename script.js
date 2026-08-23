@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const use3D = !prefersReducedMotion && supportsFinePointer;
 
     // --- Utility: throttle scroll listeners with requestAnimationFrame ---
     function onScroll(callback) {
@@ -20,29 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide as soon as the page is ready, but never make the user wait longer
     // than ~1.3s even if some below-the-fold asset is still loading.
     const loader = document.getElementById('loader');
-    if (loader) {
-        const LOADER_MAX_MS = 1300;
-        let loaderHidden = false;
-        const hideLoader = () => {
-            if (loaderHidden) return;
-            loaderHidden = true;
+    const LOADER_MAX_MS = 1300;
+    let loaderHidden = false;
+    const hideLoader = () => {
+        if (loaderHidden) return;
+        loaderHidden = true;
+        if (loader) {
             loader.classList.add('hidden');
             loader.setAttribute('aria-hidden', 'true');
-        };
+        }
+        // Kicks off the premium navbar + hero text reveal sequence.
+        document.body.classList.add('page-ready');
+    };
+    if (loader) {
         if (document.readyState === 'complete') {
             hideLoader();
         } else {
             window.addEventListener('load', hideLoader, { once: true });
         }
         setTimeout(hideLoader, LOADER_MAX_MS);
+    } else {
+        hideLoader();
     }
 
-    // --- 2 & 4 & 5 & 12: STICKY NAV, PROGRESS BAR, ACTIVE LINK, BACK-TO-TOP ---
+    // --- 2 & 4 & 5 & 12: STICKY NAV, PROGRESS BAR, ACTIVE LINK, BACK-TO-TOP, HERO PARALLAX ---
     const header = document.getElementById('header');
     const scrollProgressBar = document.getElementById('scroll-progress-bar');
     const sections = document.querySelectorAll('section[id]');
     const navLi = document.querySelectorAll('.nav-links li a');
     const backToTopButton = document.getElementById('back-to-top');
+    const heroSection = document.getElementById('home');
+    const heroBgParallax = document.getElementById('hero-bg-parallax');
 
     const updateScrollUI = onScroll(() => {
         const scrollY = window.scrollY || window.pageYOffset;
@@ -69,6 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Back to top
         backToTopButton.classList.toggle('hidden', scrollY <= 300);
+
+        // Subtle hero background parallax - only while the hero is actually in view
+        if (heroBgParallax && !prefersReducedMotion && scrollY < window.innerHeight) {
+            heroBgParallax.style.transform = `translateY(${scrollY * 0.15}px)`;
+        }
     });
     window.addEventListener('scroll', updateScrollUI, { passive: true });
     updateScrollUI();
@@ -126,12 +141,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 7. SCROLL REVEAL ANIMATIONS (IntersectionObserver) ---
-    const revealElements = document.querySelectorAll('.about-content, .feature-card, .ingredient-card, .timeline-item, .product-card, .gallery-item, .testimonial-card, .faq-item, .contact-grid');
+    // Cards that own an interactive 3D-tilt transform (feature/ingredient/
+    // gallery) get ONLY the 'revealed' class: their own CSS composes the
+    // reveal-in via --reveal-y/--reveal-o custom properties inside their
+    // single `transform` declaration, so the generic .reveal class is
+    // deliberately never added to them - it would set a competing `transform`
+    // on the same element and silently override the tilt effect.
+    // .product-card is excluded: on mobile it lives inside a horizontally
+    // scrolling carousel, and cards off-screen to the right never cross the
+    // reveal threshold until swiped to, which reads as a broken fade-in
+    // mid-swipe rather than a nice entrance - not worth it for a 3-item list.
+    // .testimonial-card is excluded entirely: its carousel crossfade already
+    // provides its entrance animation, and stacking the generic reveal on
+    // top of it fights the same active/inactive opacity logic.
+    const bespokeTiltSelector = '.feature-card, .ingredient-card, .gallery-item';
+    const revealElements = document.querySelectorAll(
+        `.about-content, .about-image, .about-text, ${bespokeTiltSelector}, .faq-item, .contact-grid`
+    );
+    const activateReveal = (el) => {
+        if (el.classList.contains('reveal-left') || el.classList.contains('reveal-right') || el.matches(bespokeTiltSelector)) {
+            el.classList.add('revealed');
+        } else {
+            el.classList.add('reveal', 'revealed');
+        }
+    };
     if ('IntersectionObserver' in window) {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal', 'active');
+                    activateReveal(entry.target);
                     revealObserver.unobserve(entry.target);
                 }
             });
@@ -139,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => revealObserver.observe(el));
     } else {
         // Fallback: simply show all
-        revealElements.forEach(el => el.classList.add('reveal', 'active'));
+        revealElements.forEach(activateReveal);
     }
 
     // --- 8. FAQ ACCORDION ---
@@ -170,17 +208,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 9. GALLERY LIGHTBOX ---
-    const galleryItems = document.querySelectorAll('.gallery-item img');
+    // --- 9. GALLERY LIGHTBOX (with prev/next navigation) ---
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item img'));
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeLightboxBtn = document.querySelector('.close-lightbox');
+    const lightboxPrevBtn = document.querySelector('.lightbox-prev');
+    const lightboxNextBtn = document.querySelector('.lightbox-next');
     let lastFocusedElement = null;
+    let currentGalleryIndex = -1;
 
-    const openLightbox = (imgEl) => {
-        lastFocusedElement = document.activeElement;
+    const showGalleryIndex = (index) => {
+        if (!galleryItems.length) return;
+        currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+        const imgEl = galleryItems[currentGalleryIndex];
         lightboxImg.src = imgEl.currentSrc || imgEl.src;
         lightboxImg.alt = imgEl.alt || '';
+    };
+
+    const openLightbox = (index) => {
+        lastFocusedElement = document.activeElement;
+        showGalleryIndex(index);
         lightbox.classList.remove('hidden');
         lightbox.setAttribute('aria-hidden', 'false');
         closeLightboxBtn.focus();
@@ -194,29 +242,250 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastFocusedElement) lastFocusedElement.focus();
     };
 
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => openLightbox(item));
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
     });
 
     closeLightboxBtn.addEventListener('click', closeLightbox);
+    if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', () => showGalleryIndex(currentGalleryIndex - 1));
+    if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', () => showGalleryIndex(currentGalleryIndex + 1));
 
     lightbox.addEventListener('click', (e) => {
-        if (e.target !== lightboxImg) {
+        if (e.target !== lightboxImg && e.target !== lightboxPrevBtn && e.target !== lightboxNextBtn) {
             closeLightbox();
         }
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
-            closeLightbox();
-        }
+        if (lightbox.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showGalleryIndex(currentGalleryIndex - 1);
+        if (e.key === 'ArrowRight') showGalleryIndex(currentGalleryIndex + 1);
     });
 
-    // --- 11. CUSTOM CURSOR WITH MASALA SPRINKLE EFFECT ---
+    // --- 10. PREMIUM 3D TILT (hero bottle + cards) - desktop, fine-pointer only ---
+    if (use3D) {
+        // Hero bottle: mouse-driven tilt/parallax, bounded to a small, realistic range.
+        const heroStage = document.getElementById('hero-tilt-stage');
+        if (heroStage && heroSection) {
+            const MAX_TILT = 8; // degrees
+            let heroTiltTicking = false;
+            let lastHeroEvent = null;
+
+            const applyHeroTilt = () => {
+                heroTiltTicking = false;
+                if (!lastHeroEvent) return;
+                const rect = heroSection.getBoundingClientRect();
+                const relX = (lastHeroEvent.clientX - rect.left) / rect.width; // 0..1
+                const relY = (lastHeroEvent.clientY - rect.top) / rect.height; // 0..1
+                const tiltX = (relX - 0.5) * 2 * MAX_TILT; // rotateY
+                const tiltY = (0.5 - relY) * 2 * (MAX_TILT * 0.75); // rotateX
+                heroStage.style.setProperty('--tiltX', `${tiltX.toFixed(2)}deg`);
+                heroStage.style.setProperty('--tiltY', `${tiltY.toFixed(2)}deg`);
+                heroStage.style.setProperty('--shine-x', `${(30 + relX * 40).toFixed(1)}%`);
+                heroStage.style.setProperty('--shine-y', `${(20 + relY * 40).toFixed(1)}%`);
+            };
+
+            heroSection.addEventListener('mousemove', (e) => {
+                lastHeroEvent = e;
+                if (!heroTiltTicking) {
+                    heroTiltTicking = true;
+                    requestAnimationFrame(applyHeroTilt);
+                }
+            }, { passive: true });
+
+            heroSection.addEventListener('mouseleave', () => {
+                lastHeroEvent = null;
+                heroStage.style.setProperty('--tiltX', '0deg');
+                heroStage.style.setProperty('--tiltY', '0deg');
+                heroStage.style.setProperty('--shine-x', '50%');
+                heroStage.style.setProperty('--shine-y', '35%');
+            });
+        }
+
+        // Generic reusable 3D card tilt (feature/ingredient/product/gallery cards)
+        const initCardTilt = (elements, maxDeg) => {
+            elements.forEach(card => {
+                let ticking = false;
+                let lastEvent = null;
+
+                const apply = () => {
+                    ticking = false;
+                    if (!lastEvent) return;
+                    const rect = card.getBoundingClientRect();
+                    const relX = (lastEvent.clientX - rect.left) / rect.width;
+                    const relY = (lastEvent.clientY - rect.top) / rect.height;
+                    const ry = (relX - 0.5) * 2 * maxDeg;
+                    const rx = (0.5 - relY) * 2 * maxDeg;
+                    card.style.setProperty('--rx', `${ry.toFixed(2)}deg`);
+                    card.style.setProperty('--ry', `${rx.toFixed(2)}deg`);
+                };
+
+                card.addEventListener('mousemove', (e) => {
+                    lastEvent = e;
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(apply);
+                    }
+                }, { passive: true });
+
+                card.addEventListener('mouseleave', () => {
+                    lastEvent = null;
+                    card.style.setProperty('--rx', '0deg');
+                    card.style.setProperty('--ry', '0deg');
+                });
+            });
+        };
+
+        initCardTilt(document.querySelectorAll('.feature-card'), 8);
+        initCardTilt(document.querySelectorAll('.ingredient-card'), 8);
+        initCardTilt(document.querySelectorAll('.product-card'), 6);
+        initCardTilt(document.querySelectorAll('.gallery-item'), 6);
+    }
+
+    // --- 11a. HOW-TO-USE SCROLL STORY ---
+    // Native scroll only (no scroll-jacking). A step is "active" once it crosses
+    // the vertical center of the viewport; the shared visual reacts accordingly.
+    const chhaasStory = document.getElementById('chhaas-story');
+    const storySteps = document.querySelectorAll('.story-step');
+    const storyParticlesHost = document.getElementById('story-particles');
+
+    const spawnStoryParticles = () => {
+        if (prefersReducedMotion || !storyParticlesHost) return;
+        for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'story-particle';
+            const px = (Math.random() - 0.5) * 40;
+            const py = 90 + Math.random() * 40;
+            particle.style.setProperty('--px', `${px}px`);
+            particle.style.setProperty('--py', `${py}px`);
+            particle.style.left = `${Math.random() * 10 - 5}px`;
+            particle.style.animationDelay = `${Math.random() * 0.3}s`;
+            storyParticlesHost.appendChild(particle);
+            setTimeout(() => particle.remove(), 1400);
+        }
+    };
+
+    if (chhaasStory && storySteps.length && 'IntersectionObserver' in window) {
+        let lastActiveStep = null;
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('in-view', entry.isIntersecting);
+                if (entry.isIntersecting) {
+                    const stepNum = entry.target.dataset.step;
+                    chhaasStory.setAttribute('data-active-step', stepNum);
+                    if (stepNum === '2' && lastActiveStep !== '2') {
+                        spawnStoryParticles();
+                    }
+                    lastActiveStep = stepNum;
+                }
+            });
+        }, { threshold: 0.5, rootMargin: '-40% 0px -40% 0px' });
+        storySteps.forEach(step => stepObserver.observe(step));
+    } else if (storySteps.length) {
+        storySteps.forEach(step => step.classList.add('in-view'));
+    }
+
+    // --- 11b. PRODUCT CAROUSEL ---
+    const productTrack = document.getElementById('product-track');
+    const productPrev = document.getElementById('product-prev');
+    const productNext = document.getElementById('product-next');
+    const productDots = document.querySelectorAll('#product-dots .carousel-dot');
+
+    if (productTrack) {
+        const productCards = Array.from(productTrack.querySelectorAll('.product-card'));
+
+        const scrollToProductCard = (index) => {
+            const card = productCards[index];
+            if (!card) return;
+            productTrack.scrollTo({
+                left: card.offsetLeft - (productTrack.offsetWidth - card.offsetWidth) / 2,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        };
+
+        if (productPrev) productPrev.addEventListener('click', () => {
+            productTrack.scrollBy({ left: -productTrack.clientWidth * 0.85, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
+        if (productNext) productNext.addEventListener('click', () => {
+            productTrack.scrollBy({ left: productTrack.clientWidth * 0.85, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
+
+        productDots.forEach(dot => {
+            dot.addEventListener('click', () => scrollToProductCard(Number(dot.dataset.index)));
+        });
+
+        if ('IntersectionObserver' in window && productCards.length) {
+            const productDotObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const idx = productCards.indexOf(entry.target);
+                        productDots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
+                    }
+                });
+            }, { root: productTrack, threshold: 0.6 });
+            productCards.forEach(card => productDotObserver.observe(card));
+        }
+    }
+
+    // --- 11c. TESTIMONIAL CAROUSEL ---
+    const testimonialTrack = document.getElementById('testimonial-track');
+    const testimonialCarousel = document.getElementById('testimonial-carousel');
+    const testimonialPrev = document.getElementById('testimonial-prev');
+    const testimonialNext = document.getElementById('testimonial-next');
+    const testimonialDots = document.querySelectorAll('#testimonial-dots .carousel-dot');
+
+    if (testimonialTrack) {
+        const testimonialCards = Array.from(testimonialTrack.querySelectorAll('.testimonial-card'));
+        let activeTestimonial = 0;
+        let autoplayTimer = null;
+
+        const setTrackHeight = () => {
+            const tallest = Math.max(...testimonialCards.map(c => c.scrollHeight));
+            testimonialTrack.style.minHeight = `${tallest}px`;
+        };
+
+        const goToTestimonial = (index) => {
+            activeTestimonial = (index + testimonialCards.length) % testimonialCards.length;
+            testimonialCards.forEach((card, i) => card.classList.toggle('active', i === activeTestimonial));
+            testimonialDots.forEach((dot, i) => dot.classList.toggle('active', i === activeTestimonial));
+        };
+
+        const startAutoplay = () => {
+            if (prefersReducedMotion || autoplayTimer) return;
+            autoplayTimer = setInterval(() => goToTestimonial(activeTestimonial + 1), 6000);
+        };
+        const stopAutoplay = () => {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+        };
+
+        if (testimonialPrev) testimonialPrev.addEventListener('click', () => { goToTestimonial(activeTestimonial - 1); stopAutoplay(); startAutoplay(); });
+        if (testimonialNext) testimonialNext.addEventListener('click', () => { goToTestimonial(activeTestimonial + 1); stopAutoplay(); startAutoplay(); });
+        testimonialDots.forEach(dot => {
+            dot.addEventListener('click', () => { goToTestimonial(Number(dot.dataset.index)); stopAutoplay(); startAutoplay(); });
+        });
+
+        if (testimonialCarousel) {
+            testimonialCarousel.addEventListener('mouseenter', stopAutoplay);
+            testimonialCarousel.addEventListener('mouseleave', startAutoplay);
+            testimonialCarousel.addEventListener('focusin', stopAutoplay);
+            testimonialCarousel.addEventListener('focusout', startAutoplay);
+            testimonialCarousel.addEventListener('touchstart', stopAutoplay, { passive: true });
+        }
+
+        window.addEventListener('resize', onScroll(setTrackHeight));
+        setTrackHeight();
+        goToTestimonial(0);
+        startAutoplay();
+    }
+
+    // --- 12. CUSTOM CURSOR WITH MASALA SPRINKLE EFFECT ---
     // Desktop-only, and skipped entirely for reduced-motion or touch/coarse-pointer devices.
     const cursor = document.querySelector('.custom-cursor');
-    const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (cursor && !prefersReducedMotion && supportsFinePointer && window.innerWidth > 768) {
+    if (cursor && use3D && window.innerWidth > 768) {
         // Masala particle palette (spice colors: orange, red, brown, green, yellow)
         const masalaColors = ['#F57C00', '#D84315', '#6D4C41', '#43A047', '#FDD835', '#E65100'];
 
