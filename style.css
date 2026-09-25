@@ -927,19 +927,11 @@ color: var(--secondary-color);
     background-color: #fdf2e2;
 }
 
-.product-carousel {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: minmax(0, 400px);
+    justify-content: center;
     perspective: 1200px;
-    flex: 1;
-    min-width: 0;
 }
 
 .product-card {
@@ -961,15 +953,6 @@ color: var(--secondary-color);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* Product carousel chrome only matters once the grid becomes a horizontal
-   scroller on mobile - on desktop all 3 cards already fit in the grid.
-   (Testimonials are a single-card carousel at every breakpoint and keep
-   their nav/dots visible via the shared .carousel-nav/.carousel-dots
-   styles defined below.) */
-.product-carousel .carousel-nav,
-#product-dots.carousel-dots {
-    display: none;
-}
 .carousel-nav {
     flex-shrink: 0;
     width: 46px;
@@ -1900,22 +1883,6 @@ select:focus-visible,
     .story-visual { height: 300px; }
     .story-steps { gap: 2.5rem; }
 
-    /* Product carousel: becomes a real swipeable carousel below desktop */
-    .product-grid {
-        display: flex;
-        grid-template-columns: unset;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 1.5rem;
-        padding-bottom: 0.25rem;
-    }
-    .product-grid::-webkit-scrollbar { display: none; }
-    .product-card { flex: 0 0 82%; scroll-snap-align: center; }
-    .product-carousel .carousel-nav,
-    #product-dots.carousel-dots { display: flex; }
-
     /* Grids */
     .features-grid, .ingredients-grid { gap: 1.5rem; }
     .masonry-gallery { column-count: 2; column-gap: 1rem; }
@@ -1976,7 +1943,6 @@ select:focus-visible,
     .feature-card h3 { font-size: 1.25rem; }
 
     /* Products */
-    .product-grid { gap: 2rem; }
     .product-image { padding: 1.5rem; }
     .product-info { padding: 1.5rem 1.25rem; }
     .product-info h3 { font-size: 1.5rem; }

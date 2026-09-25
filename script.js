@@ -147,10 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // single `transform` declaration, so the generic .reveal class is
     // deliberately never added to them - it would set a competing `transform`
     // on the same element and silently override the tilt effect.
-    // .product-card is excluded: on mobile it lives inside a horizontally
-    // scrolling carousel, and cards off-screen to the right never cross the
-    // reveal threshold until swiped to, which reads as a broken fade-in
-    // mid-swipe rather than a nice entrance - not worth it for a 3-item list.
+    // .product-card is excluded: its own tilt/hover transform is not wired
+    // for the --reveal-y/--reveal-o composition.
     // .testimonial-card is excluded entirely: its carousel crossfade already
     // provides its entrance animation, and stacking the generic reveal on
     // top of it fights the same active/inactive opacity logic.
@@ -384,48 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
         storySteps.forEach(step => stepObserver.observe(step));
     } else if (storySteps.length) {
         storySteps.forEach(step => step.classList.add('in-view'));
-    }
-
-    // --- 11b. PRODUCT CAROUSEL ---
-    const productTrack = document.getElementById('product-track');
-    const productPrev = document.getElementById('product-prev');
-    const productNext = document.getElementById('product-next');
-    const productDots = document.querySelectorAll('#product-dots .carousel-dot');
-
-    if (productTrack) {
-        const productCards = Array.from(productTrack.querySelectorAll('.product-card'));
-
-        const scrollToProductCard = (index) => {
-            const card = productCards[index];
-            if (!card) return;
-            productTrack.scrollTo({
-                left: card.offsetLeft - (productTrack.offsetWidth - card.offsetWidth) / 2,
-                behavior: prefersReducedMotion ? 'auto' : 'smooth'
-            });
-        };
-
-        if (productPrev) productPrev.addEventListener('click', () => {
-            productTrack.scrollBy({ left: -productTrack.clientWidth * 0.85, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-        });
-        if (productNext) productNext.addEventListener('click', () => {
-            productTrack.scrollBy({ left: productTrack.clientWidth * 0.85, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-        });
-
-        productDots.forEach(dot => {
-            dot.addEventListener('click', () => scrollToProductCard(Number(dot.dataset.index)));
-        });
-
-        if ('IntersectionObserver' in window && productCards.length) {
-            const productDotObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const idx = productCards.indexOf(entry.target);
-                        productDots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
-                    }
-                });
-            }, { root: productTrack, threshold: 0.6 });
-            productCards.forEach(card => productDotObserver.observe(card));
-        }
     }
 
     // --- 11c. TESTIMONIAL CAROUSEL ---
