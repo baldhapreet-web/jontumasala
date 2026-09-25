@@ -994,14 +994,16 @@ color: var(--secondary-color);
 
 .product-image {
     background: #fff0de;
-padding: 2rem;
+    overflow: hidden;
     transition: background 0.3s;
 }
 .product-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
     transition: transform 0.3s;
-    height: clamp(180px, 28vw, 250px);
-    object-fit: contain;
-    margin: 0 auto;
 }
 .product-card:hover .product-image img {
     transform: scale(1.1);
@@ -1943,7 +1945,6 @@ select:focus-visible,
     .feature-card h3 { font-size: 1.25rem; }
 
     /* Products */
-    .product-image { padding: 1.5rem; }
     .product-info { padding: 1.5rem 1.25rem; }
     .product-info h3 { font-size: 1.5rem; }
     .product-info .btn { width: 100%; text-align: center; padding: 0.9rem 1rem; }
